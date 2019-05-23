@@ -6,8 +6,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
+import javax.jws.WebService;
 import javax.xml.ws.Holder;
 
+@WebService(endpointInterface = "soap.ImageService")  
 public class ImageServiceImpl implements ImageService {
 
 	@Override
@@ -31,7 +33,7 @@ public class ImageServiceImpl implements ImageService {
 	}
 
 	@Override
-	public void getImages(Integer page, Holder ids, Holder sources) {
+	public void getImages(Integer page, Holder<ArrayList<Integer>> ids, Holder<ArrayList<String>> sources) {
 		String url = "jdbc:sqlite:D://Facultate/posts.db";
         Connection conn = null;
         ids.value=new ArrayList<Integer>();

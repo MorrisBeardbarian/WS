@@ -17,7 +17,7 @@ public interface UserService {
 	public boolean changePassword(String email, String olderPassword, String newPassword);
 	
 	@WebMethod
-	public void findUser(String in_username, @WebParam(name = "id", mode = WebParam.Mode.OUT) Holder id,
-            @WebParam(name = "username", mode = WebParam.Mode.OUT) Holder username);
+	public void findUser(String in_username, @WebParam(name = "id", mode = WebParam.Mode.OUT) Holder<Integer> id,
+            @WebParam(name = "username", mode = WebParam.Mode.OUT) Holder<String> username);
 
 }

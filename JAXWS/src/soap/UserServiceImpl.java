@@ -52,7 +52,7 @@ public class UserServiceImpl implements UserService {
 	}
 	
 	@Override
-	public void findUser(String in_username, Holder id, Holder username) {
+	public void findUser(String in_username, Holder<Integer> id, Holder<String> username) {
 		String url = "jdbc:sqlite:D://Facultate/users.db";
         Connection conn = null;
         id.value=null;
