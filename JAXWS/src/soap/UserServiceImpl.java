@@ -3,9 +3,12 @@ package soap;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import javax.jws.WebParam;
 import javax.jws.WebService;
+import javax.xml.ws.Holder;
 
 @WebService(endpointInterface = "soap.UserService")  
 public class UserServiceImpl implements UserService {
@@ -46,6 +49,27 @@ public class UserServiceImpl implements UserService {
             //System.out.println(e.getMessage());
         }
 		return false;
+	}
+	
+	@Override
+	public void findUser(String in_username, Holder id, Holder username) {
+		String url = "jdbc:sqlite:D://Facultate/users.db";
+        Connection conn = null;
+        id.value=null;
+        username.value=null;
+        try {
+            conn = DriverManager.getConnection(url);
+            PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM users WHERE username = ? LIMIT 1");
+            pstmt.setString(1, in_username);
+            ResultSet rs  = pstmt.executeQuery();
+            while(rs.next()){
+            	id.value=rs.getInt("id");
+            	username.value=rs.getString("username");
+            }
+        } catch (Exception e) {
+        	e.printStackTrace();
+            //System.out.println(e.getMessage());
+        }
 	}
 
 }
